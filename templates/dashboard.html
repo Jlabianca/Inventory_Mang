@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+</head>
+<body>
+    <div style="text-align: right;">
+        <span>Welcome, {{ session['user_name'] }}</span>
+        <a href="{{ url_for('profile') }}">Profile</a>
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    <h2>Inventory Dashboard</h2>
+    <a href="{{ url_for('add_item') }}">Add New Item</a>
+    <a href="{{ url_for('transactions') }}">View Transactions</a>
+
+    <ul>
+        {% for item in items %}
+        <li>
+            {{ item.name }} - {{ item.quantity }}
+            <a href="{{ url_for('update_item', item_id=item.id) }}">Update</a>
+            <form action="{{ url_for('delete_item', item_id=item.id) }}" method="POST" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

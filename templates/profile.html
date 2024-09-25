@@ -1,0 +1,59 @@
+<!-- templates/profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Profile - Inventory System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .container { max-width: 600px; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <!-- Include your navbar here if desired -->
+    <div class="container">
+        <h2 class="my-4 text-center">Your Profile</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+        <form method="POST">
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name.label }}
+                {{ form.name(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="form-control") }}
+            </div>
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="form-control") }}
+                <small class="form-text text-muted">Leave blank if you don't want to change your password.</small>
+            </div>
+            <div class="form-group">
+                {{ form.confirm_password.label }}
+                {{ form.confirm_password(class="form-control") }}
+            </div>
+            <div class="text-center">
+                {{ form.submit(class="btn btn-primary") }}
+            </div>
+        </form>
+        <a href="{{ url_for('inventory') }}" class="btn btn-link mt-3">Back to Inventory</a>
+    </div>
+    <!-- Include Bootstrap JS and its dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-fgpCg0G/X8YFcsV5JCn0srJwN9i1hb+0F1xjk5xQtRg="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJw30JzAa9LjtST+iKWjKQ0R1FEss9q+a6l7N21Y68ozQ7rEm"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+            crossorigin="anonymous"></script>
+</body>
+</html>

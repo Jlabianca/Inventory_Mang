@@ -1,0 +1,52 @@
+<!-- templates/history.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction History - Inventory System</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .table { margin-top: 20px; }
+        .container { margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <!-- Include your navbar here if needed -->
+    <div class="container">
+        <h2>{{ 'Admin' if is_admin else 'Your' }} Transaction History</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    {% if is_admin %}
+                    <th>User</th>
+                    {% endif %}
+                    <th>Action</th>
+                    <th>Quantity</th>
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>
+                        {% if transaction.product and not transaction.product.deleted %}
+                            {{ transaction.product.name }}
+                        {% else %}
+                            <em>Product Deleted</em>
+                        {% endif %}
+                    </td>
+                    {% if is_admin %}
+                    <td>{{ transaction.user.name }}</td>
+                    {% endif %}
+                    <td>{{ transaction.action }}</td>
+                    <td>{{ transaction.quantity }}</td>
+                    <td>{{ transaction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{{ url_for('inventory') }}" class="btn btn-primary">Back to Inventory</a>
+    </div>
+</body>
+</html>

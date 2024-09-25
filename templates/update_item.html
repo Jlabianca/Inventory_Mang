@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Item</title>
+</head>
+<body>
+    <h2>Update Item</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name(size=20) }}<br>
+        {{ form.quantity.label }} {{ form.quantity(size=20) }}<br>
+        {{ form.submit() }}
+    </form>
+</body>
+</html>
